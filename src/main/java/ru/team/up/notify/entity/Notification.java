@@ -1,66 +1,69 @@
 package ru.team.up.notify.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Set;
 
 /**
  * @author Dmitry Koryanov
  *
  */
-@Entity
-@Table(name = "NOTIFICATION")
-@org.springframework.data.relational.core.mapping.Table
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Document(collection="notification")
+@Builder
 public class Notification {
 
     /**
-     * Уникальный идентификатор
+     * Статус уведомления
+     */
+    public static enum Status {
+        NOT_SENT,
+        SENT;
+    }
+
+    /**
+     * Уникальный идентификатор, генерится самой базой
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     /**
      * Текст уведомления
      */
-    @Column(name = "TEXT")
     private String text;
 
     /**
      * Тема уведомления
      */
-    @Column(name = "SUBJECT")
     private String subject;
 
     /**
      * Email, куда необходимо отправить уведомление
      */
-    @Column(name = "EMAIL")
     private String email;
 
     /**
-     * Тип сообщения
+     * Статус уведомления
      */
-    @Column(name = "NOTIFICATION_STATUS")
-    @Enumerated(EnumType.STRING)
-    private NotificationStatus notificationStatus;
+    @Indexed
+    private Status status;
 
     /**
      * Время создания уведомления
      */
-    @Column(name = "CREATION_TIME")
     private LocalDateTime creationTime;
 
     /**
      * Время отправки уведомления
      */
-    @Column(name = "SENT_TIME")
     private LocalDateTime sentTime;
 
 }

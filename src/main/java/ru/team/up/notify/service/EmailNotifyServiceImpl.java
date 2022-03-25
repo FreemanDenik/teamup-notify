@@ -3,13 +3,13 @@ package ru.team.up.notify.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
 import ru.team.up.notify.entity.Notification;
-import ru.team.up.notify.entity.NotificationStatus;
 import ru.team.up.notify.repositories.NotificationRepository;
 
 import java.time.LocalDateTime;
@@ -41,9 +41,9 @@ public class EmailNotifyServiceImpl implements EmailNotifyService{
 
         try {
             emailSender.send(message);
-            notification.setNotificationStatus(NotificationStatus.SENT);
+            notification.setStatus(Notification.Status.SENT);
             notification.setSentTime(LocalDateTime.now());
-            notificationRepository.save(notification);
+            notificationRepository.save(notification).subscribe();
             log.debug("Уведомление id:{} отправлено на электронную почту {}.",
                     notification.getId(), notification.getEmail());
         } catch (MailException e) {
@@ -56,12 +56,12 @@ public class EmailNotifyServiceImpl implements EmailNotifyService{
     /**
      * Метод выбирает уведомления для отправки по электронной почте из базы
      */
+    @EventListener(ApplicationReadyEvent.class)
     @Override
     public void sendNotifications() {
 
-        Flux<Notification> notifications = notificationRepository.findAllByNotificationStatusEquals(NotificationStatus.NOT_SENT);
-
-        notifications.subscribe(n -> sendNotification(n));
+        log.debug("----------> sendNotifications method has been called..");
+        notificationRepository.findAllByStatusEquals(Notification.Status.NOT_SENT).limitRate(1).subscribe(n -> sendNotification(n));
 
     }
 }
