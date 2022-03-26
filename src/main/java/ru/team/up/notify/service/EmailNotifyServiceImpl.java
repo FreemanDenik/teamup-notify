@@ -10,19 +10,20 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import ru.team.up.notify.entity.Notification;
-import ru.team.up.notify.repositories.NotificationRepository;
 
 import java.time.LocalDateTime;
 
 /**
- * @author Dmitry Koryanov
+ * @author Nail Faizullin, Dmitry Koryanov
+ * <p>
+ * Класс сервиса для отправки уведомлений ru.team.up.notify.entity.Notification
  */
 @Slf4j
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class EmailNotifyServiceImpl implements EmailNotifyService{
 
-    private NotificationRepository notificationRepository;
+    private NotificationService notificationService;
     private JavaMailSender emailSender;
 
     /**
@@ -43,7 +44,7 @@ public class EmailNotifyServiceImpl implements EmailNotifyService{
             emailSender.send(message);
             notification.setStatus(Notification.Status.SENT);
             notification.setSentTime(LocalDateTime.now());
-            notificationRepository.save(notification).subscribe();
+            notificationService.save(notification).subscribe();
             log.debug("Уведомление id:{} отправлено на электронную почту {}.",
                     notification.getId(), notification.getEmail());
         } catch (MailException e) {
@@ -60,8 +61,8 @@ public class EmailNotifyServiceImpl implements EmailNotifyService{
     @Override
     public void sendNotifications() {
 
-        log.debug("----------> sendNotifications method has been called..");
-        notificationRepository.findAllByStatusEquals(Notification.Status.NOT_SENT).limitRate(1).subscribe(n -> sendNotification(n));
+        log.debug("Вызван метод для отправки уведомлений в статусе NOT_SENT");
+        notificationService.findAllByStatusEquals(Notification.Status.NOT_SENT).limitRate(1).subscribe(n -> sendNotification(n));
 
     }
 }

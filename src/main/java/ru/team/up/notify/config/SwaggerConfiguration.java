@@ -20,7 +20,6 @@ public class SwaggerConfiguration implements WebFluxConfigurer {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .enable(true)
-                //.genericModelSubstitutes(Mono.class, Flux.class, Publisher.class)
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
