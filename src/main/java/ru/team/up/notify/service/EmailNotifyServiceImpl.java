@@ -3,11 +3,10 @@ package ru.team.up.notify.service;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import ru.team.up.notify.entity.Notification;
 
@@ -57,12 +56,10 @@ public class EmailNotifyServiceImpl implements EmailNotifyService{
     /**
      * Метод выбирает уведомления для отправки по электронной почте из базы
      */
-    @EventListener(ApplicationReadyEvent.class)
+    @Scheduled(fixedRate = 10000)
     @Override
     public void sendNotifications() {
-
         log.debug("Вызван метод для отправки уведомлений в статусе NOT_SENT");
         notificationService.findAllByStatusEquals(Notification.Status.NOT_SENT).limitRate(1).subscribe(n -> sendNotification(n));
-
     }
 }
