@@ -5,34 +5,34 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
-import ru.team.up.notify.entity.Notification;
-import ru.team.up.notify.service.NotificationService;
+import reactor.core.publisher.Flux;
+import ru.team.up.notify.entity.Notify;
+import ru.team.up.notify.service.NotifyService;
 
 /**
  * REST-контроллер для уведомлений
  *
  * @author Nail Faizullin, Dmitry Koryanov
- * @link localhost:8080/swagger-ui.html
+ * @link localhost:8085/swagger-ui.html
  * Документация API
  */
-@Tag(name = "Notification Controller", description = "Notification API")
+@Tag(name = "Notify Controller", description = "Notify API")
 @RestController
-@RequestMapping("/notification")
+@RequestMapping("/notify")
 @Slf4j
-public class NotifyUser {
+public class NotifyUserController {
 
     @Autowired
-    NotificationService notificationService;
+    NotifyService notifyService;
 
     /**
      * Запись в базу уведомления.
-     * @param notification Mono, параметризованный уведомлением.
+     * @param notify Mono, параметризованный уведомлением.
      * @return возвращает записанное уведомление с заполненным базой Id идентификатором.
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Mono<Notification> notifyUser(@RequestBody Mono<Notification> notification){
-        return notificationService.save(notification);
+    public Flux<Notify> notifyUser(@RequestBody Flux<Notify> notify){
+        return notifyService.save(notify);
     }
 }

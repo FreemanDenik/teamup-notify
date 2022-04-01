@@ -15,20 +15,12 @@ import java.time.LocalDateTime;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection="notification")
+@Document(collection="notify")
 @Builder
-public class Notification {
+public class Notify {
 
     /**
-     * Статус уведомления
-     */
-    public static enum Status {
-        NOT_SENT,
-        SENT;
-    }
-
-    /**
-     * Уникальный идентификатор, генерится самой базой
+     * Уникальный идентификатор, генерится самой базой при сохранении записи в БД
      */
     @Id
     private String id;
@@ -52,7 +44,7 @@ public class Notification {
      * Статус уведомления
      */
     @Indexed
-    private Status status;
+    private NotifyStatus status;
 
     /**
      * Время создания уведомления
