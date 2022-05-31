@@ -9,7 +9,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.time.LocalDateTime;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+/*@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureWebTestClient
 @Slf4j
 class TeamupNotifyApplicationTests {
@@ -22,4 +22,4 @@ class TeamupNotifyApplicationTests {
 
     }
 
-}
+}*/
