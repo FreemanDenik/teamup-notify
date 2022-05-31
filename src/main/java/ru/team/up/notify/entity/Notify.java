@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Document(collection="notify")
 @Builder
+@EqualsAndHashCode
 public class Notify {
 
     /**
