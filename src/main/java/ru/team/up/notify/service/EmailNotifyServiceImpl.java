@@ -42,6 +42,7 @@ public class EmailNotifyServiceImpl implements EmailNotifyService {
 
         SimpleMailMessage message = new SimpleMailMessage();
 
+        message.setFrom("teamupteamupov@yandex.ru");
         message.setTo(notify.getEmail());
         message.setSubject(notify.getSubject());
         message.setText(notify.getText());
@@ -67,10 +68,10 @@ public class EmailNotifyServiceImpl implements EmailNotifyService {
     @Override
     public void sendNotifys() {
         log.debug("Вызван метод для отправки уведомлений в статусе NOT_SENT. Отсылаем {} уведомления(й)",numOfEmailsToSend);
-
-        notifyService
-                .findAllByStatusEquals(NotifyStatus.NOT_SENT)
-                .take(numOfEmailsToSend)
-                .subscribe(n -> sendNotify(n));
+        sendNotify(new Notify("1", "text", "subject", "Gzubarew111@yandex.ru", NotifyStatus.SENT, LocalDateTime.now(), LocalDateTime.now()));
+//        notifyService
+//                .findAllByStatusEquals(NotifyStatus.NOT_SENT)
+//                .take(numOfEmailsToSend)
+//                .subscribe(n -> sendNotify(n));
     }
 }
