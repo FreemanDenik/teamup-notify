@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    restart: unless-stopped
+    ports:
+      - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka
+    restart: unless-stopped
+    ports:
+      - "9092:9092"
+    environment:
+      DOCKER_API_VERSION: 1.22
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: blog-db
