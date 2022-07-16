@@ -1,0 +1,10 @@
+ru\team\up\notify\core\repositories\NotifyRepository.class
+ru\team\up\notify\core\service\EmailNotifyServiceImpl.class
+ru\team\up\notify\core\config\MailConfiguration.class
+ru\team\up\notify\core\service\NotifyService.class
+ru\team\up\notify\core\service\EmailNotifyService.class
+ru\team\up\notify\core\entity\Notify.class
+ru\team\up\notify\core\service\NotifyServiceImpl.class
+ru\team\up\notify\core\entity\Notify$NotifyBuilder.class
+ru\team\up\notify\core\entity\NotifyStatus.class
+ru\team\up\notify\core\controller\NotifyUserController.class

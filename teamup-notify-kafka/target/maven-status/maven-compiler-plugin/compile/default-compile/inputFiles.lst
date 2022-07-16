@@ -1,0 +1,7 @@
+C:\Users\LRUNB\Desktop\NOTIFY_FINAL\teamup-notify-main\teamup-notify-kafka\src\main\java\ru\team\up\notify\kafka\config\ProducerModeratorConfig.java
+C:\Users\LRUNB\Desktop\NOTIFY_FINAL\teamup-notify-main\teamup-notify-kafka\src\main\java\ru\team\up\notify\kafka\processors\NewAssignEventProcessor.java
+C:\Users\LRUNB\Desktop\NOTIFY_FINAL\teamup-notify-main\teamup-notify-kafka\src\main\java\ru\team\up\notify\kafka\service\KafkaEventDispatcherImpl.java
+C:\Users\LRUNB\Desktop\NOTIFY_FINAL\teamup-notify-main\teamup-notify-kafka\src\main\java\ru\team\up\notify\kafka\exception\IncorrectKafkaEventTypeException.java
+C:\Users\LRUNB\Desktop\NOTIFY_FINAL\teamup-notify-main\teamup-notify-kafka\src\main\java\ru\team\up\notify\kafka\service\KafkaEventDispatcher.java
+C:\Users\LRUNB\Desktop\NOTIFY_FINAL\teamup-notify-main\teamup-notify-kafka\src\main\java\ru\team\up\notify\kafka\config\ConsumerModeratorConfig.java
+C:\Users\LRUNB\Desktop\NOTIFY_FINAL\teamup-notify-main\teamup-notify-kafka\src\main\java\ru\team\up\notify\kafka\processors\KafkaEventProcessor.java

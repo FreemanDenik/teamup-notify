@@ -1,0 +1,7 @@
+ru\team\up\notify\kafka\processors\NewAssignEventProcessor.class
+ru\team\up\notify\kafka\exception\IncorrectKafkaEventTypeException.class
+ru\team\up\notify\kafka\processors\KafkaEventProcessor.class
+ru\team\up\notify\kafka\config\ConsumerModeratorConfig.class
+ru\team\up\notify\kafka\service\KafkaEventDispatcher.class
+ru\team\up\notify\kafka\service\KafkaEventDispatcherImpl.class
+ru\team\up\notify\kafka\config\ProducerModeratorConfig.class
